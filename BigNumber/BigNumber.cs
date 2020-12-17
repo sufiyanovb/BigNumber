@@ -7,26 +7,34 @@ namespace BigNumber
     {
         private readonly byte[] _digits;
         private readonly Regex _regExpOnlyNumbers = new Regex(@"^[0-9]+$");
-        private const string _regExRemoveLeadingZeros = @"^0+(?=\d+$)";
 
         public BigNumber(string x)
         {
             if (string.IsNullOrWhiteSpace(x))
                 throw new ArgumentNullException(nameof(x), "Исходная строка является пустой!");
-
             if (!_regExpOnlyNumbers.IsMatch(x))
                 throw new ArgumentException("В исходной строке содержатся нечисловые элементы!", nameof(x));
 
-            x = Regex.Replace(x, _regExRemoveLeadingZeros, "");//0000 превращается в 0
+            int offset = 0;
 
-            var arraySize = x.Length;
+            for (var i = 0; i < x.Length; i++)
+            {
+                if ((byte)(x[i] - '0') != 0)
+                    break;
 
-            _digits = new byte[arraySize];
+                offset++;
+            }
 
-            arraySize -= 1;
+            if (x.Length - offset == 0)
+            {
+                _digits = new byte[] { 0 };
+                return;
+            }
 
-            for (var i = arraySize; i >= 0; i--)
-                _digits[arraySize - i] = (byte)(x[i] - '0');
+            _digits = new byte[x.Length - offset];
+
+            for (int i = _digits.Length - 1; i >= 0; i--)
+                _digits[_digits.Length - i - 1] = (byte)(x[i + offset] - '0');
 
         }
         private BigNumber(byte[] x)
