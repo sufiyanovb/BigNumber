@@ -17,7 +17,8 @@ namespace BigNumber
 
             Console.WriteLine($"operator +, result = {c.ToString()}|{sw.ElapsedTicks} ticks");
 
-            sw = new Stopwatch();
+            sw.Reset();
+
             sw.Start();
             var d = a * b;
             sw.Stop();

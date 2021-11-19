@@ -11,9 +11,14 @@ namespace BigNumber
         public BigNumber(string x)
         {
             if (string.IsNullOrWhiteSpace(x))
+            {
                 throw new ArgumentNullException(nameof(x), "Исходная строка является пустой!");
+            }
+
             if (!_regExpOnlyNumbers.IsMatch(x))
+            {
                 throw new ArgumentException("В исходной строке содержатся нечисловые элементы!", nameof(x));
+            }
 
             int offset = 0;
 
@@ -34,7 +39,9 @@ namespace BigNumber
             _digits = new byte[x.Length - offset];
 
             for (int i = _digits.Length - 1; i >= 0; i--)
+            {
                 _digits[_digits.Length - i - 1] = (byte)(x[i + offset] - '0');
+            }
 
         }
         private BigNumber(byte[] x)
@@ -58,9 +65,12 @@ namespace BigNumber
             _digits = new byte[x.Length - offset];
 
             for (var i = _digits.Length - 1; i >= 0; i--)
+            {
                 _digits[_digits.Length - 1 - i] = x[i];
+            }
 
         }
+
         public static BigNumber operator +(BigNumber a, BigNumber b)
         {
             var result = new byte[a._digits.Length + b._digits.Length];
@@ -82,6 +92,7 @@ namespace BigNumber
             return new BigNumber(result);
 
         }
+
         public static BigNumber operator *(BigNumber a, BigNumber b)
         {
             var result = new byte[a._digits.Length + b._digits.Length];
@@ -105,12 +116,24 @@ namespace BigNumber
             }
             return new BigNumber(result);
         }
+
+        public static BigNumber operator /(BigNumber a, BigNumber b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static BigNumber operator -(BigNumber a, BigNumber b)
+        {
+            throw new NotImplementedException();
+        }
+
         private static int GetValue(byte[] obj, int index)
         {
             return index <= obj.Length - 1
                              ? obj[index]
                              : 0;
         }
+
         public override string ToString()
         {
             return string.Concat(_digits);
