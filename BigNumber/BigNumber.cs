@@ -135,6 +135,11 @@ namespace BigNumber
             }
         }
 
+        public static implicit operator BigNumber(string s)
+        {
+            return new BigNumber(s);
+        }
+
         public override string ToString()
         {
             return string.Concat(_digits);

@@ -7,8 +7,8 @@ namespace BigNumber
     {
         static void Main(string[] args)
         {
-            var a = new BigNumber("95");
-            var b = new BigNumber("5");
+            BigNumber a = "95";
+            BigNumber b = "5";
 
             var sw = new Stopwatch();
             sw.Start();

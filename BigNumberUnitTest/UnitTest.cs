@@ -8,8 +8,8 @@ namespace BigNumberUnitTest
         [TestMethod]
         public void TestMethodOverFlow()
         {
-            var a = new BigNumber.BigNumber("5");
-            var b = new BigNumber.BigNumber("5");
+            BigNumber.BigNumber a = "5";
+            BigNumber.BigNumber b = "5";
 
             Assert.AreEqual(true, (a + b).ToString() == "10");
         }
@@ -17,8 +17,8 @@ namespace BigNumberUnitTest
         [TestMethod]
         public void TestMethodZeroAtStart()
         {
-            var a = new BigNumber.BigNumber("000000000000000000000000000000000000000000000000005");
-            var b = new BigNumber.BigNumber("00005");
+            BigNumber.BigNumber a = "000000000000000000000000000000000000000000000000005";
+            BigNumber.BigNumber b = "00005";
 
             Assert.AreEqual(true, (a + b).ToString() == "10");
         }
@@ -27,8 +27,8 @@ namespace BigNumberUnitTest
         [TestMethod]
         public void TestMethodMultiply()
         {
-            var a = new BigNumber.BigNumber("000000000000000000000000000000000000000000000000005");
-            var b = new BigNumber.BigNumber("00005");
+            BigNumber.BigNumber a = "000000000000000000000000000000000000000000000000005";
+            BigNumber.BigNumber b = "00005";
 
             Assert.AreEqual(true, (a * b).ToString() == "25");
         }
@@ -37,7 +37,7 @@ namespace BigNumberUnitTest
         [TestMethod]
         public void TestMethodRemoveZeroAtStart()
         {
-            var a = new BigNumber.BigNumber("00000000000000000000000000000000000000000000000000");
+            BigNumber.BigNumber a = "00000000000000000000000000000000000000000000000000";
 
             Assert.AreEqual(true, (a).ToString() == "0");
         }
