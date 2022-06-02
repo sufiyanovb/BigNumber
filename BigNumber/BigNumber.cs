@@ -12,12 +12,12 @@ namespace BigNumber
         {
             if (string.IsNullOrWhiteSpace(x))
             {
-                throw new ArgumentNullException(nameof(x), "Исходная строка является пустой!");
+                throw new ArgumentNullException("Исходная строка является пустой!");
             }
 
             if (!_regExpOnlyNumbers.IsMatch(x))
             {
-                throw new ArgumentException("В исходной строке содержатся нечисловые элементы!", nameof(x));
+                throw new ArgumentException("В исходной строке содержатся нечисловые элементы!");
             }
 
             int offset = 0;
@@ -79,8 +79,8 @@ namespace BigNumber
 
             for (var i = 0; i < a._digits.Length + b._digits.Length; i++)
             {
-                var n1 = GetValue(a._digits, i);
-                var n2 = GetValue(b._digits, i);
+                var n1 = a[i];
+                var n2 = b[i];
 
                 var value = carry + n1 + n2;
 
@@ -100,11 +100,11 @@ namespace BigNumber
             for (var j = 0; j < b._digits.Length; j++)
             {
                 var carry = 0;
-                var n2 = GetValue(b._digits, j);
+                var n2 = b._digits[j];
 
                 for (var i = 0; i < a._digits.Length; i++)
                 {
-                    var n1 = GetValue(a._digits, i);
+                    var n1 = a[i];
 
                     var multiply = n1 * n2 + result[i + j] + carry;
                     result[i + j] = (byte)(multiply % 10);
@@ -127,11 +127,12 @@ namespace BigNumber
             throw new NotImplementedException();
         }
 
-        private static int GetValue(byte[] obj, int index)
+        private byte this[int index]
         {
-            return index <= obj.Length - 1
-                             ? obj[index]
-                             : 0;
+            get
+            {
+                return index <= _digits.Length - 1 ? _digits[index] : (byte)0;
+            }
         }
 
         public override string ToString()
