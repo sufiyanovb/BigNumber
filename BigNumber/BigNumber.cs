@@ -80,11 +80,8 @@ namespace BigNumber
             for (var i = 0; i < a._digits.Length + b._digits.Length; i++)
             {
                 var value = carry + a[i] + b[i];
-
                 carry = value / 10;
-
                 result[i] = (byte)(value % 10);
-
             }
             return new BigNumber(result);
 
