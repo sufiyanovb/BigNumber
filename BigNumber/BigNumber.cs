@@ -79,10 +79,7 @@ namespace BigNumber
 
             for (var i = 0; i < a._digits.Length + b._digits.Length; i++)
             {
-                var n1 = a[i];
-                var n2 = b[i];
-
-                var value = carry + n1 + n2;
+                var value = carry + a[i] + b[i];
 
                 carry = value / 10;
 
@@ -100,18 +97,12 @@ namespace BigNumber
             for (var j = 0; j < b._digits.Length; j++)
             {
                 var carry = 0;
-                var n2 = b._digits[j];
-
                 for (var i = 0; i < a._digits.Length; i++)
                 {
-                    var n1 = a[i];
-
-                    var multiply = n1 * n2 + result[i + j] + carry;
+                    var multiply = a[i] * b[j] + result[i + j] + carry;
                     result[i + j] = (byte)(multiply % 10);
                     carry = multiply / 10;
-
                 }
-
                 result[a._digits.Length + j] += (byte)carry;
             }
             return new BigNumber(result);
