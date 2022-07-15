@@ -25,8 +25,9 @@ namespace BigNumber
             for (var i = 0; i < x.Length; i++)
             {
                 if ((byte)(x[i] - '0') != 0)
+                {
                     break;
-
+                }
                 offset++;
             }
 
@@ -51,7 +52,9 @@ namespace BigNumber
             for (var i = x.Length - 1; i >= 0; i--)
             {
                 if (x[i] != 0)
+                {
                     break;
+                }
 
                 offset++;
             }
